@@ -4,7 +4,7 @@ local watch = require("awful.widget.watch")
 local spawn = require("awful.spawn")
 
 local path_to_icons = "/usr/share/icons/Arc/status/symbolic/"
-local request_command = 'amixer -D pulse sget Master'
+local request_command = 'amixer sget Master'
 
 volume_widget = wibox.widget {
     {
@@ -38,9 +38,9 @@ end
 - scrolling when cursor is over the widget
 ]]
 volume_widget:connect_signal("button::press", function(_,_,_,button)
-    if (button == 4)     then awful.spawn("amixer -D pulse sset Master 5%+", false)
-    elseif (button == 5) then awful.spawn("amixer -D pulse sset Master 5%-", false)
-    elseif (button == 1) then awful.spawn("amixer -D pulse sset Master toggle", false)
+    if (button == 4)     then awful.spawn("amixer set Master 5%+", false)
+    elseif (button == 5) then awful.spawn("amixer set Master 5%-", false)
+    elseif (button == 1) then awful.spawn("amixer set Master toggle", false)
     end
 
     spawn.easy_async(request_command, function(stdout, stderr, exitreason, exitcode)
